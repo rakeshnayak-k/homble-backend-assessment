@@ -54,3 +54,4 @@ def products_list(request):
             return Response({'error msg':serializer.errors}, status=HTTP_400_BAD_REQUEST)
         except Exception as e:
             return Response({'error msg':str(e)}, status=HTTP_400_BAD_REQUEST)
+        
