@@ -68,3 +68,30 @@ class Product(models.Model):
         ordering = []
         verbose_name = "Product"
         verbose_name_plural = "Products"
+
+
+class SKU(models.Model):
+    product = models.ForeignKey(
+        "Product",
+        related_name="skus",
+        on_delete=models.CASCADE
+    )
+    size = models.CharField(
+        _("size"),
+        max_length=50,
+        unique=True, 
+        help_text=_("Size of the product, e.g., 200 gm, 500 gm, etc.")
+    )
+    price = models.PositiveSmallIntegerField(
+        _("selling price (Rs.)"),
+        help_text=_("Price payable by customer (Rs.)"),
+    )
+
+    def __str__(self):
+        return f"{self.product.name} - {self.size} (Rs. {self.price})"
+
+    class Meta:
+        db_table = "sku"
+        ordering = []
+        verbose_name = "SKU"
+        verbose_name_plural = "SKUs"
