@@ -4,7 +4,7 @@ from rest_framework.response import Response
 from rest_framework.status import (
     HTTP_200_OK, HTTP_400_BAD_REQUEST, HTTP_201_CREATED, HTTP_404_NOT_FOUND, HTTP_403_FORBIDDEN
 )
-
+from django.http import JsonResponse
 from .models import Product, Status, SKU
 from .serializers import ProductListSerializer, SKUSerializer
 from django.utils import timezone
@@ -104,3 +104,9 @@ def edit_sku_status(request, sku_id):
         return Response(serializer.data, status=HTTP_200_OK)
     except SKU.DoesNotExist:
         return Response({"error": "SKU not found"}, status=HTTP_404_NOT_FOUND)
+    
+
+def all_skus_with_category(request):
+    skus_with_category = SKU.objects.select_related('category').all()
+    skus_data = [{'name': sku.name, 'category': sku.category.name} for sku in skus_with_category]
+    return JsonResponse(skus_data, safe=False)
