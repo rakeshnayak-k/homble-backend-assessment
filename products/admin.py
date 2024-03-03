@@ -39,6 +39,7 @@ class ProductInline(admin.StackedInline):
 
 @admin.register(SKU)
 class SKUAdmin(admin.ModelAdmin):
-    list_display = ('product', 'size', 'cost_price', 'platform_commission', 'selling_price')
+    list_display = ('product', 'size', 'cost_price', 'platform_commission', 'selling_price','status')
+    list_filter = ('status',) 
     search_fields = ('product__name', 'size')
     autocomplete_fields = ['product'] 
