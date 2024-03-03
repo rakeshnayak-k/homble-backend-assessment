@@ -13,7 +13,7 @@ class ProductAdmin(admin.ModelAdmin):
     search_fields = ("name",)
     list_filter = ("is_refrigerated", "category")
     fields = (
-        ("name", "price"),
+        ("name"),
         ("category", "is_refrigerated"),
         "description",
         ("id", "created_at"),
@@ -32,13 +32,13 @@ class ProductInline(admin.StackedInline):
     model = Product
     extra = 0
     ordering = ("-id",)
-    readonly_fields = ("name", "price", "is_refrigerated")
+    readonly_fields = ("name", "is_refrigerated")
     fields = (readonly_fields,)
     show_change_link = True
 
 
 @admin.register(SKU)
 class SKUAdmin(admin.ModelAdmin):
-    list_display = ('product', 'size', 'price')
+    list_display = ('product', 'size', 'cost_price', 'platform_commission', 'selling_price')
     search_fields = ('product__name', 'size')
     autocomplete_fields = ['product'] 

@@ -14,10 +14,6 @@ class Product(models.Model):
         unique=True,
         help_text=_("This will be displayed to user as-is"),
     )
-    price = models.PositiveSmallIntegerField(
-        _("selling price (Rs.)"),
-        help_text=_("Price payable by customer (Rs.)"),
-    )
     description = models.TextField(
         _("descriptive write-up"),
         unique=False,
@@ -60,7 +56,7 @@ class Product(models.Model):
         super().save(*args, **kwargs)
 
     def __str__(self):
-        return f"{self.name} (Rs. {self.price})"
+        return f"{self.name})"
 
     class Meta:
         # Just to be explicit.
@@ -82,13 +78,28 @@ class SKU(models.Model):
         unique=True, 
         help_text=_("Size of the product, e.g., 200 gm, 500 gm, etc.")
     )
-    price = models.PositiveSmallIntegerField(
+    selling_price = models.PositiveSmallIntegerField(
         _("selling price (Rs.)"),
         help_text=_("Price payable by customer (Rs.)"),
     )
+    platform_commission = models.PositiveSmallIntegerField(
+        _("platform commission"),
+        help_text=_("Commission charged by the platform (Rs.)"),
+        null=True,
+    )
+    cost_price = models.PositiveSmallIntegerField(
+        _("cost price (Rs.)"),
+        help_text=_("Cost price of the product (Rs.)"),
+        null=True,
+    )
+
+    def save(self, *args, **kwargs):
+        # Set selling_price as the sum of cost_price and platform_commission
+        self.selling_price = self.cost_price + self.platform_commission
+        super().save(*args, **kwargs)
 
     def __str__(self):
-        return f"{self.product.name} - {self.size} (Rs. {self.price})"
+        return f"{self.product.name} - {self.size} (Rs. {self.selling_price})"
 
     class Meta:
         db_table = "sku"
