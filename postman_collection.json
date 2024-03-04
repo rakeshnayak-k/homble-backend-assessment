@@ -1,10 +1,9 @@
 {
 	"info": {
-		"_postman_id": "3dc3793d-b9a6-443a-9e25-37c5c539dad5",
+		"_postman_id": "0f921457-52dd-4c74-8fd0-bd6f76252725",
 		"name": "Homble Backend Assessment",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "16443486",
-		"_collection_link": "https://myjaxy.postman.co/workspace/b0868cdd-6095-4277-af34-8e4538a7f871/collection/16443486-3dc3793d-b9a6-443a-9e25-37c5c539dad5?action=share&source=collection_link&creator=16443486"
+		"_exporter_id": "29901240"
 	},
 	"item": [
 		{
@@ -12,6 +11,91 @@
 			"request": {
 				"method": "GET",
 				"header": [],
+				"url": {
+					"raw": "localhost:8000/products/",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"products",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Products list_post",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": " {\r\n    \"name\": \"kitkat\",\r\n    \"price\": 50,\r\n    \"ingredients\": \"sugar\",\r\n    \"description\":\"High sugar content.\"\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8000/products/",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"products",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create_sku_post",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": " {\r\n   \"product\": \"\",\r\n   \"size\": \"\",\r\n   \"selling_price\": \"\"\r\n }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8000/products/create_sku/",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"products",
+						"create_sku",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Products list patch",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": " {\r\n    \"name\": \"Cake\",\r\n    \"price\": 500,\r\n    \"ingredients\": \"[carbs, fat, palm oil]\"\r\n    \r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
 				"url": {
 					"raw": "localhost:8000/products/",
 					"host": [
